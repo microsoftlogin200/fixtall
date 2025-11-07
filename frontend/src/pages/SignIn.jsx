@@ -29,7 +29,7 @@ const SignIn = () => {
 
     setLoading(true);
     try {
-      await mockCheckEmail(email);
+      await authService.checkEmail(email);
       // Navigate to password page with email
       navigate('/password', { state: { email } });
     } catch (err) {
