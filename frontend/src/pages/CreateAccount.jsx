@@ -55,11 +55,10 @@ const CreateAccount = () => {
 
     setLoading(true);
     try {
-      const result = await mockRegister(formData.email, formData.password, formData.name);
+      const result = await authService.register(formData.email, formData.password, formData.name);
       
       // Store auth data in localStorage
-      localStorage.setItem('authToken', result.token);
-      localStorage.setItem('user', JSON.stringify(result.user));
+      authService.storeAuthData(result.token, result.user);
       
       // Navigate to dashboard
       navigate('/dashboard');
