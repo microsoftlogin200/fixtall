@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
-import { mockRegister } from '../mock';
+import authService from '../services/authService';
 
 const CreateAccount = () => {
   const navigate = useNavigate();
