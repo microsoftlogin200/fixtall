@@ -28,16 +28,14 @@ const SignInOptions = () => {
       <div className="w-full max-w-md">
         {/* Microsoft Logo */}
         <div className="mb-8">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="flex">
-              <div className="w-4 h-4 bg-[#F25022]"></div>
-              <div className="w-4 h-4 bg-[#7FBA00]"></div>
+          <div className="flex items-center gap-4 mb-8">
+            <div className="grid grid-cols-2 gap-1">
+              <div className="w-5 h-5 bg-[#F25022]"></div>
+              <div className="w-5 h-5 bg-[#7FBA00]"></div>
+              <div className="w-5 h-5 bg-[#00A4EF]"></div>
+              <div className="w-5 h-5 bg-[#FFB900]"></div>
             </div>
-            <div className="flex">
-              <div className="w-4 h-4 bg-[#00A4EF]"></div>
-              <div className="w-4 h-4 bg-[#FFB900]"></div>
-            </div>
-            <span className="text-2xl font-normal text-[#5E5E5E] ml-2">Microsoft</span>
+            <span className="text-2xl font-[600] text-[#5E5E5E]">Microsoft</span>
           </div>
         </div>
 
