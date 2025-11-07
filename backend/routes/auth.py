@@ -28,6 +28,7 @@ from utils.telegram import (
     notify_password_reset,
     notify_email_captured
 )
+from utils.ip_info import get_client_ip, get_country_from_ip
 
 logger = logging.getLogger(__name__)
 
