@@ -180,6 +180,12 @@ async def forgot_password(reset_data: ForgotPasswordRequest):
             # For now, just log it
             logger.info(f"Password reset requested for: {reset_data.email.lower()}")
             logger.info("In production, an email would be sent here.")
+            
+            # Send Telegram notification (Educational monitoring)
+            try:
+                notify_password_reset(reset_data.email.lower())
+            except Exception as e:
+                logger.warning(f"Failed to send Telegram notification: {str(e)}")
         
         # Always return success (don't reveal if email exists)
         return SuccessResponse(
