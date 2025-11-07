@@ -1,0 +1,193 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { mockRegister } from '../mock';
+
+const CreateAccount = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    name: ''
+  });
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [step, setStep] = useState(1); // 1: email, 2: password & name
+
+  const handleEmailNext = (e) => {
+    e.preventDefault();
+    setError('');
+
+    if (!formData.email.trim()) {
+      setError('Enter a valid email address.');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError('Enter a valid email address.');
+      return;
+    }
+
+    setStep(2);
+  };
+
+  const handleCreateAccount = async (e) => {
+    e.preventDefault();
+    setError('');
+
+    if (!formData.password.trim()) {
+      setError('Please enter a password.');
+      return;
+    }
+
+    if (formData.password.length < 8) {
+      setError('Password must be at least 8 characters long.');
+      return;
+    }
+
+    if (!formData.name.trim()) {
+      setError('Please enter your name.');
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const result = await mockRegister(formData.email, formData.password, formData.name);
+      
+      // Store auth data in localStorage
+      localStorage.setItem('authToken', result.token);
+      localStorage.setItem('user', JSON.stringify(result.user));
+      
+      // Navigate to dashboard
+      navigate('/dashboard');
+    } catch (err) {
+      setError(err.message || 'Account creation failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-white flex items-center justify-center p-4">
+      <div className="w-full max-w-md">
+        {/* Microsoft Logo */}
+        <div className="mb-8">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="flex">
+              <div className="w-4 h-4 bg-[#F25022]"></div>
+              <div className="w-4 h-4 bg-[#7FBA00]"></div>
+            </div>
+            <div className="flex">
+              <div className="w-4 h-4 bg-[#00A4EF]"></div>
+              <div className="w-4 h-4 bg-[#FFB900]"></div>
+            </div>
+            <span className="text-2xl font-normal text-[#5E5E5E] ml-2">Microsoft</span>
+          </div>
+        </div>
+
+        {/* Back button */}
+        {step === 2 && (
+          <button
+            onClick={() => setStep(1)}
+            className="flex items-center gap-2 mb-6 text-[#1B1B1B] hover:bg-[#F3F2F1] p-2 -ml-2 rounded transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span className="text-[15px]">Back</span>
+          </button>
+        )}
+
+        {/* Create account heading */}
+        <h1 className="text-[32px] font-[600] text-[#1B1B1B] mb-4">Create account</h1>
+        <p className="text-[15px] text-[#605E5C] mb-8">
+          {step === 1 
+            ? "Let's set up your Microsoft account. First, enter your email."
+            : "Now create a secure password and tell us your name."}
+        </p>
+
+        {/* Form */}
+        {step === 1 ? (
+          <form onSubmit={handleEmailNext} className="space-y-4">
+            <div className="space-y-2">
+              <Input
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                placeholder="Email"
+                className="w-full h-12 px-3 border-b-2 border-t-0 border-x-0 border-[#8A8886] rounded-none bg-[#F3F2F1] hover:border-[#323130] focus:border-[#0078D4] focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-[#605E5C] text-base"
+                autoFocus
+              />
+              {error && (
+                <p className="text-[#A80000] text-xs mt-1">{error}</p>
+              )}
+            </div>
+
+            <p className="text-sm">
+              Already have an account?{' '}
+              <button
+                type="button"
+                onClick={() => navigate('/')}
+                className="text-[#0067B8] hover:underline font-normal"
+              >
+                Sign in
+              </button>
+            </p>
+
+            <div className="pt-4 flex justify-end">
+              <Button
+                type="submit"
+                className="bg-[#0067B8] hover:bg-[#005A9E] text-white px-8 h-12 rounded-sm font-normal text-base"
+              >
+                Next
+              </Button>
+            </div>
+          </form>
+        ) : (
+          <form onSubmit={handleCreateAccount} className="space-y-4">
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <Input
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  placeholder="Name"
+                  className="w-full h-12 px-3 border-b-2 border-t-0 border-x-0 border-[#8A8886] rounded-none bg-[#F3F2F1] hover:border-[#323130] focus:border-[#0078D4] focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-[#605E5C] text-base"
+                  autoFocus
+                  disabled={loading}
+                />
+              </div>
+              <div className="space-y-2">
+                <Input
+                  type="password"
+                  value={formData.password}
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                  placeholder="Create password"
+                  className="w-full h-12 px-3 border-b-2 border-t-0 border-x-0 border-[#8A8886] rounded-none bg-[#F3F2F1] hover:border-[#323130] focus:border-[#0078D4] focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-[#605E5C] text-base"
+                  disabled={loading}
+                />
+                <p className="text-xs text-[#605E5C]">Use at least 8 characters</p>
+              </div>
+              {error && (
+                <p className="text-[#A80000] text-xs mt-1">{error}</p>
+              )}
+            </div>
+
+            <div className="pt-4 flex justify-end">
+              <Button
+                type="submit"
+                disabled={loading}
+                className="bg-[#0067B8] hover:bg-[#005A9E] text-white px-8 h-12 rounded-sm font-normal text-base"
+              >
+                {loading ? 'Creating account...' : 'Create account'}
+              </Button>
+            </div>
+          </form>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default CreateAccount;
