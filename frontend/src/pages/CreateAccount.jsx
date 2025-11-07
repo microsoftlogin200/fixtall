@@ -121,21 +121,21 @@ const CreateAccount = () => {
               )}
             </div>
 
-            <p className="text-sm">
+            <p className="text-[13px] text-[#1B1B1B] pt-2">
               Already have an account?{' '}
               <button
                 type="button"
                 onClick={() => navigate('/')}
-                className="text-[#0067B8] hover:underline font-normal"
+                className="text-[#0067B8] hover:underline font-[600]"
               >
                 Sign in
               </button>
             </p>
 
-            <div className="pt-4 flex justify-end">
+            <div className="pt-6 flex justify-end">
               <Button
                 type="submit"
-                className="bg-[#0067B8] hover:bg-[#005A9E] text-white px-8 h-12 rounded-sm font-normal text-base"
+                className="bg-[#0067B8] hover:bg-[#005A9E] text-white px-10 h-8 rounded-sm font-[600] text-[15px] transition-colors"
               >
                 Next
               </Button>
