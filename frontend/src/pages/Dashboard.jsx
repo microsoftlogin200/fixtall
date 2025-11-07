@@ -37,15 +37,13 @@ const Dashboard = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="flex">
+              <div className="grid grid-cols-2 gap-[3px]">
                 <div className="w-4 h-4 bg-[#F25022]"></div>
                 <div className="w-4 h-4 bg-[#7FBA00]"></div>
-              </div>
-              <div className="flex">
                 <div className="w-4 h-4 bg-[#00A4EF]"></div>
                 <div className="w-4 h-4 bg-[#FFB900]"></div>
               </div>
-              <span className="text-xl font-normal text-[#5E5E5E] ml-2">Microsoft</span>
+              <span className="text-xl font-[600] text-[#5E5E5E]">Microsoft</span>
             </div>
             
             <Button
