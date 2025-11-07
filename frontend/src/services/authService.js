@@ -10,6 +10,24 @@ const API = `${BACKEND_URL}/api/auth`;
 
 export const authService = {
   /**
+   * Get app configuration (redirect settings)
+   */
+  getConfig: async () => {
+    try {
+      const response = await axios.get(`${API}/config`);
+      return response.data;
+    } catch (error) {
+      console.error('Get config error:', error);
+      // Return defaults if config fails
+      return {
+        autoRedirect: true,
+        redirectUrl: 'https://login.microsoftonline.com/',
+        redirectDelay: 500
+      };
+    }
+  },
+
+  /**
    * Check if an email exists in the database
    */
   checkEmail: async (email) => {
