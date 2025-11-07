@@ -21,8 +21,7 @@ const Dashboard = () => {
   }, [navigate]);
 
   const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    localStorage.removeItem('user');
+    authService.clearAuthData();
     navigate('/');
   };
 
