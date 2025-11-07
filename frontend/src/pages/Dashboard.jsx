@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { LogOut, User } from 'lucide-react';
+import authService from '../services/authService';
 
 const Dashboard = () => {
   const navigate = useNavigate();
