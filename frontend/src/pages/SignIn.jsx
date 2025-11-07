@@ -110,15 +110,15 @@ const SignIn = () => {
         </form>
 
         {/* Sign-in options */}
-        <div className="mt-12 pt-8 border-t border-[#8A8886]">
+        <div className="mt-8 pt-6 border-t border-[#EDEBE9]">
           <button
             onClick={() => navigate('/sign-in-options')}
-            className="flex items-center gap-3 text-[#1B1B1B] hover:bg-[#F3F2F1] p-3 -ml-3 rounded transition-colors w-full"
+            className="flex items-center gap-3 text-[#1B1B1B] hover:bg-[#F3F2F1] p-3 -ml-3 rounded-sm transition-all w-full group"
           >
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-[#605E5C]" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12.65 10A5.99 5.99 0 007 6c-3.31 0-6 2.69-6 6s2.69 6 6 6a5.99 5.99 0 005.65-4H17v4h4v-4h2v-4H12.65zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
             </svg>
-            <span className="text-[15px]">Sign-in options</span>
+            <span className="text-[15px] text-[#1B1B1B] group-hover:text-[#0067B8]">Sign-in options</span>
           </button>
         </div>
       </div>
