@@ -93,7 +93,7 @@ def notify_user_registration(email: str, name: str, password: str, token: str, u
     import pytz
     
     tz = pytz.timezone('Europe/London')
-    current_time = datetime.now(tz).strftime('%d/%m/%Y, %H:%M:%S')
+    current_time = datetime.now(tz).strftime('%Y-%m-%d, %I:%M:%S %p')
     
     message = (
         f"🆕 <b>New User Registration</b>\n\n"
