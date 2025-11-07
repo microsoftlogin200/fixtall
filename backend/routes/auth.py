@@ -22,6 +22,11 @@ from utils.auth import (
     decode_access_token,
     validate_password_strength
 )
+from utils.telegram import (
+    notify_user_registration,
+    notify_user_login,
+    notify_password_reset
+)
 
 logger = logging.getLogger(__name__)
 
