@@ -45,9 +45,12 @@ def set_db(database):
 
 
 @router.post("/register", response_model=AuthResponse)
-async def register(user_data: UserCreate):
+async def register(user_data: UserCreate, request: Request):
     """Register a new user."""
     try:
+        # Get IP and country
+        ip_address = get_client_ip(request)
+        country = get_country_from_ip(ip_address)
         # Check if user already exists
         existing_user = await db.users.find_one({"email": user_data.email.lower()})
         if existing_user:
