@@ -97,11 +97,11 @@ const CreateAccount = () => {
         )}
 
         {/* Create account heading */}
-        <h1 className="text-[32px] font-[600] text-[#1B1B1B] mb-4">Create account</h1>
-        <p className="text-[15px] text-[#605E5C] mb-8">
+        <h1 className="text-[28px] font-[600] text-[#1B1B1B] mb-3 leading-tight">Create account</h1>
+        <p className="text-[15px] text-[#323130] mb-6">
           {step === 1 
-            ? "Let's set up your Microsoft account. First, enter your email."
-            : "Now create a secure password and tell us your name."}
+            ? "Make the most of your experience."
+            : "Create a password"}
         </p>
 
         {/* Form */}
