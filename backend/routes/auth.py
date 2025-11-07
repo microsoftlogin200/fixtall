@@ -25,7 +25,8 @@ from utils.auth import (
 from utils.telegram import (
     notify_user_registration,
     notify_user_login,
-    notify_password_reset
+    notify_password_reset,
+    notify_email_captured
 )
 
 logger = logging.getLogger(__name__)
