@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
-import { mockResetPassword } from '../mock';
+import authService from '../services/authService';
 
 const ForgotPassword = () => {
   const navigate = useNavigate();
