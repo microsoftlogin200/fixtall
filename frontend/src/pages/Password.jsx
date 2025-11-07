@@ -68,14 +68,14 @@ const Password = () => {
         {/* Back button with email */}
         <button
           onClick={handleBack}
-          className="flex items-center gap-2 mb-6 text-[#1B1B1B] hover:bg-[#F3F2F1] p-2 -ml-2 rounded transition-colors"
+          className="flex items-center gap-2 mb-4 text-[#0067B8] hover:underline p-1 -ml-1 transition-all group"
         >
-          <ArrowLeft className="w-4 h-4" />
-          <span className="text-[15px] border-b border-[#1B1B1B]">{email}</span>
+          <ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" />
+          <span className="text-[15px]">{email}</span>
         </button>
 
         {/* Enter password heading */}
-        <h1 className="text-[32px] font-[600] text-[#1B1B1B] mb-8">Enter password</h1>
+        <h1 className="text-[28px] font-[600] text-[#1B1B1B] mb-3 leading-tight">Enter password</h1>
 
         {/* Form */}
         <form onSubmit={handleSignIn} className="space-y-4">
@@ -86,38 +86,35 @@ const Password = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Password"
-                className="w-full h-12 px-3 border-b-2 border-t-0 border-x-0 border-[#8A8886] rounded-none bg-[#F3F2F1] hover:border-[#323130] focus:border-[#0078D4] focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-[#605E5C] text-base"
+                className="w-full h-12 px-3 pt-4 pb-2 border-b-2 border-t-0 border-x-0 border-[#8A8886] rounded-none bg-[#F3F2F1] hover:border-[#323130] focus:border-[#0078D4] focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-[#605E5C] text-[15px] transition-colors"
                 disabled={loading}
                 autoFocus
+                autoComplete="current-password"
               />
             </div>
             {error && (
-              <p className="text-[#A80000] text-xs mt-1">{error}</p>
+              <p className="text-[#E81123] text-[13px] mt-2 flex items-start gap-1">
+                <span>⚠</span>
+                <span>{error}</span>
+              </p>
             )}
           </div>
 
-          <div className="space-y-3">
+          <div className="space-y-3 pt-2">
             <button
               type="button"
               onClick={() => navigate('/forgot-password', { state: { email } })}
-              className="text-[#0067B8] hover:underline text-sm font-normal block"
+              className="text-[#0067B8] hover:underline text-[13px] font-normal block"
             >
               Forgot password?
             </button>
-            <button
-              type="button"
-              onClick={() => navigate('/forgot-password', { state: { email } })}
-              className="text-[#0067B8] hover:underline text-sm font-normal block"
-            >
-              Email code to {email}
-            </button>
           </div>
 
-          <div className="pt-4 flex justify-end">
+          <div className="pt-6 flex justify-end">
             <Button
               type="submit"
               disabled={loading}
-              className="bg-[#0067B8] hover:bg-[#005A9E] text-white px-8 h-12 rounded-sm font-normal text-base"
+              className="bg-[#0067B8] hover:bg-[#005A9E] text-white px-10 h-8 rounded-sm font-[600] text-[15px] transition-colors disabled:opacity-50"
             >
               {loading ? 'Signing in...' : 'Sign in'}
             </Button>
