@@ -33,10 +33,10 @@ const ForgotPassword = () => {
 
     setLoading(true);
     try {
-      await mockResetPassword(email);
+      await authService.resetPassword(email);
       setSuccess(true);
     } catch (err) {
-      setError('Something went wrong. Please try again.');
+      setError(err.message || 'Something went wrong. Please try again.');
     } finally {
       setLoading(false);
     }
