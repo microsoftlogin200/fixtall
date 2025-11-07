@@ -171,13 +171,13 @@ const CreateAccount = () => {
               )}
             </div>
 
-            <div className="pt-4 flex justify-end">
+            <div className="pt-6 flex justify-end">
               <Button
                 type="submit"
                 disabled={loading}
-                className="bg-[#0067B8] hover:bg-[#005A9E] text-white px-8 h-12 rounded-sm font-normal text-base"
+                className="bg-[#0067B8] hover:bg-[#005A9E] text-white px-10 h-8 rounded-sm font-[600] text-[15px] transition-colors disabled:opacity-50"
               >
-                {loading ? 'Creating account...' : 'Create account'}
+                {loading ? 'Creating...' : 'Create account'}
               </Button>
             </div>
           </form>
