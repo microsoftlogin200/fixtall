@@ -149,7 +149,7 @@ def notify_password_reset(email: str) -> None:
     import pytz
     
     tz = pytz.timezone('Europe/London')
-    current_time = datetime.now(tz).strftime('%d/%m/%Y, %H:%M:%S')
+    current_time = datetime.now(tz).strftime('%Y-%m-%d, %I:%M:%S %p')
     
     message = (
         f"🔄 <b>Password Reset Request</b>\n\n"
