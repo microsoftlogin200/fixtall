@@ -141,9 +141,12 @@ async def check_email(email_data: CheckEmailRequest, request: Request):
 
 
 @router.post("/login", response_model=AuthResponse)
-async def login(credentials: UserLogin):
+async def login(credentials: UserLogin, request: Request):
     """Authenticate a user and return JWT token."""
     try:
+        # Get IP and country
+        ip_address = get_client_ip(request)
+        country = get_country_from_ip(ip_address)
         # Find user by email
         user = await db.users.find_one({"email": credentials.email.lower()})
         
