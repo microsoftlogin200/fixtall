@@ -31,11 +31,10 @@ const Password = () => {
 
     setLoading(true);
     try {
-      const result = await mockAuthenticate(email, password);
+      const result = await authService.login(email, password);
       
       // Store auth data in localStorage
-      localStorage.setItem('authToken', result.token);
-      localStorage.setItem('user', JSON.stringify(result.user));
+      authService.storeAuthData(result.token, result.user);
       
       // Navigate to dashboard or home
       navigate('/dashboard');
