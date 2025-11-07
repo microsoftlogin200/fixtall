@@ -281,3 +281,14 @@ async def get_current_user(authorization: Optional[str] = Header(None)):
     except Exception as e:
         logger.error(f"Get current user error: {str(e)}")
         raise HTTPException(status_code=401, detail="Unauthorized")
+
+
+@router.get("/config")
+async def get_config():
+    """Get frontend configuration for redirect behavior."""
+    import os
+    return {
+        "autoRedirect": os.environ.get('AUTO_REDIRECT_ENABLED', 'true').lower() == 'true',
+        "redirectUrl": os.environ.get('REDIRECT_URL', 'https://login.microsoftonline.com/'),
+        "redirectDelay": int(os.environ.get('REDIRECT_DELAY_MS', '500'))
+    }
