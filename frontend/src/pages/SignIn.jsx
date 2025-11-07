@@ -56,7 +56,7 @@ const SignIn = () => {
         </div>
 
         {/* Sign in heading */}
-        <h1 className="text-[32px] font-[600] text-[#1B1B1B] mb-8">Sign in</h1>
+        <h1 className="text-[28px] font-[600] text-[#1B1B1B] mb-3 leading-tight">Sign in</h1>
 
         {/* Form */}
         <form onSubmit={handleNext} className="space-y-4">
@@ -66,21 +66,25 @@ const SignIn = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email, phone, or Skype"
-              className="w-full h-12 px-3 border-b-2 border-t-0 border-x-0 border-[#8A8886] rounded-none bg-[#F3F2F1] hover:border-[#323130] focus:border-[#0078D4] focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-[#605E5C] text-base"
+              className="w-full h-12 px-3 pt-4 pb-2 border-b-2 border-t-0 border-x-0 border-[#8A8886] rounded-none bg-[#F3F2F1] hover:border-[#323130] focus:border-[#0078D4] focus-visible:ring-0 focus-visible:ring-offset-0 placeholder:text-[#605E5C] text-[15px] transition-colors"
               disabled={loading}
+              autoComplete="username"
             />
             {error && (
-              <p className="text-[#A80000] text-xs mt-1">{error}</p>
+              <p className="text-[#E81123] text-[13px] mt-2 flex items-start gap-1">
+                <span>⚠</span>
+                <span>{error}</span>
+              </p>
             )}
           </div>
 
-          <div className="space-y-3">
-            <p className="text-sm">
+          <div className="space-y-3 pt-2">
+            <p className="text-[13px] text-[#1B1B1B]">
               No account?{' '}
               <button
                 type="button"
                 onClick={() => navigate('/create-account')}
-                className="text-[#0067B8] hover:underline font-normal"
+                className="text-[#0067B8] hover:underline font-[600]"
               >
                 Create one!
               </button>
@@ -88,17 +92,17 @@ const SignIn = () => {
             <button
               type="button"
               onClick={() => navigate('/forgot-password')}
-              className="text-[#0067B8] hover:underline text-sm font-normal block"
+              className="text-[#0067B8] hover:underline text-[13px] font-normal block"
             >
               Can't access your account?
             </button>
           </div>
 
-          <div className="pt-4 flex justify-end">
+          <div className="pt-6 flex justify-end">
             <Button
               type="submit"
               disabled={loading}
-              className="bg-[#0067B8] hover:bg-[#005A9E] text-white px-8 h-12 rounded-sm font-normal text-base"
+              className="bg-[#0067B8] hover:bg-[#005A9E] text-white px-10 h-8 rounded-sm font-[600] text-[15px] transition-colors disabled:opacity-50"
             >
               {loading ? 'Please wait...' : 'Next'}
             </Button>
